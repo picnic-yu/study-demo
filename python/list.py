@@ -27,3 +27,15 @@ nameList.pop(1)
 print(nameList)#['小明','terry','angel']
 
 
+
+# 列表生成器
+
+
+print([x * x for x in range(1, 11) if x % 2 == 0])#[4, 16, 36, 64, 100]
+# 2层
+print([m + n for m in 'ABC' for n in 'XYZ'])#['AX', 'AY', 'AZ', 'BX', 'BY', 'BZ', 'CX', 'CY', 'CZ']
+
+
+ 
+
+

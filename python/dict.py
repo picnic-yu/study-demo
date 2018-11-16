@@ -30,4 +30,10 @@ print(d)
 # set和dict类似，也是一组key的集合，但不存储value。由于key不能重复，所以，在set中，没有重复的key。
 
 # 要创建一个set，需要提供一个list作为输入集合：
-s = Set([1,2,3])
+s = set([1,2,3])
+
+# add(key)方法可以添加元素到set中，可以重复添加，但不会有效果
+s.add(33)
+print(s)
+
+# 通过remove(key)方法可以删除元素
