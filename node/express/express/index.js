@@ -6,7 +6,9 @@ function createApplication(){
     //app其实就是真正的请求监听函数
     let app = function (req,res){
         console.log(2)
+        // url.parse()可以将一个完整的URL地址，分为很多部分，常用的有：host、port、pathname、path、query。
         const {pathname} = url.parse(req.url,true)
+        // 服务器监听，当匹配到对应得路由 执行回调函数
         for(let i =0;i<app.routes.length;i++){
             let route = app.routes[i]
             if(route.method == req.method.toLowerCase()
@@ -27,6 +29,7 @@ function createApplication(){
     app.routes = []
     app.listen = function(){
         console.log(4)
+        // 将app注入 建立一个服务器 监听得就是上面定义app得函数
         let server = http.createServer(app);
         
         server.listen.apply(server,arguments);
