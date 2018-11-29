@@ -11,13 +11,10 @@ function createApplication(){
         for(let i =0;i<app.routes.length;i++){
             let route = app.routes[i];
             let {method,path,handler} =  app.routes[i];
-            if(method === m && path === pathname){
+            // all 和 * 是处理匹配所有方法和所有路径
+            if((method === m || method==='all')&& (path === pathname || path==='*')){
                 return handler(req,res);
             }
-            // if(route.method == req.method.toLowerCase()
-            //     && route.path == pathname){
-            //         return route.handler(req,res);
-            // }
         }
         res.end('not');
     }
@@ -33,6 +30,13 @@ function createApplication(){
     });
     
     app.routes = [];
+    app.all = function(path,handler){
+        app.routes.push({
+            method:'all',//匹配全部
+            path,
+            handler
+        })
+    }
     app.listen = function(){
         // 将app注入 建立一个服务器 监听得就是上面定义app得函数
         let server = http.createServer(app);
