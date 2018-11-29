@@ -3,4 +3,7 @@ const app = express();
 app.get('/hello',(req,res) => {
     res.end('hello')
 });
+app.post('/hello',(req,res) => {
+    res.end('hello')
+});
 app.listen(8080);

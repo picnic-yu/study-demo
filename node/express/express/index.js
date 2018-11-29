@@ -1,34 +1,39 @@
 const http = require('http');
 const url = require('url');
 function createApplication(){
-    console.log(1)
-
     //app其实就是真正的请求监听函数
     let app = function (req,res){
-        console.log(2)
+        // 获取请求得方法
+        let m = req.method.toLowerCase();
         // url.parse()可以将一个完整的URL地址，分为很多部分，常用的有：host、port、pathname、path、query。
-        const {pathname} = url.parse(req.url,true)
+        const {pathname} = url.parse(req.url,true);
         // 服务器监听，当匹配到对应得路由 执行回调函数
         for(let i =0;i<app.routes.length;i++){
-            let route = app.routes[i]
-            if(route.method == req.method.toLowerCase()
-                && route.path == pathname){
-                    return route.handler(req,res)
+            let route = app.routes[i];
+            let {method,path,handler} =  app.routes[i];
+            if(method === m && path === pathname){
+                return handler(req,res);
             }
+            // if(route.method == req.method.toLowerCase()
+            //     && route.path == pathname){
+            //         return route.handler(req,res);
+            // }
         }
-        res.end('not')
+        res.end('not');
     }
-    app.get = function(path,handler){
-        console.log(3)
-        app.routes.push({
-            method:'get',
-            path,
-            handler
-        })
-    }
-    app.routes = []
+    http.METHODS.forEach((method) => {
+        method = method.toLocaleLowerCase();//小写
+        app[method] = function(path,handler){
+            app.routes.push({
+                method,
+                path,
+                handler
+            })
+        }
+    });
+    
+    app.routes = [];
     app.listen = function(){
-        console.log(4)
         // 将app注入 建立一个服务器 监听得就是上面定义app得函数
         let server = http.createServer(app);
         
