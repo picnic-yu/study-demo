@@ -44,7 +44,97 @@ let arr:[number,string] = [123,'22']
 数组每一个位置设置类型
 ```
 
-6. 枚举类型
+6. 枚举类型  如果标识符没有赋值  就是下标
+```
+enum Flag {
+    SUCCESS=1,
+    ERROR=1
+}
+let s:Flag= Flag.SUCCESS
+```
+7.  any类型
+```
+var oBox:any = document.getElementById('box');
+oBox.style.color = 'red';
 ```
 
+8.  其他类型的子类型  null 和undefined
+```
+let ee:number;
+console.log(ee)//报错
+let ee:number|undefined;
+console.log(ee)
+```
+9. void 表示方法没有返回任何类型
+
+10. never
+
+
+### 函数
+1. 函数的定义
+
+```函数声明
+function run () {
+
+}
+```
+```匿名函数
+var run2 = function(){
+
+}
+```
+ts中定义函数方法
+```函数声明法
+function run():string{
+    return '22'
+}
+
+```
+```匿名函数
+var fun2 = function() :number{
+    return 123;
+}
+
+```
+2. ts函数方法传参
+```
+function getInfo(name:string):string{
+    return "22"
+}
+```
+3. 可选参数   位置必须在最后面
+es5方法的实参和形参可以不一样 ts中必须一样  如果不一样就需要配置可选参数
+```
+function getInfo(name:string,age?:number):string{
+    return "22"
+}
+```
+4. 默认参数
+es5中无法设置默认参数  es6和ts可以设置
+```
+function getInfo(name:string,age:number=20):string{
+    return "22"
+}
+```
+5. 剩余参数 ...运算符接收形参传过来的值
+```
+function sum(a:number,b:number,c:number):number{
+    return a+b+c
+}
+function sum(...result:number[]):number{
+    var sum = 0;
+    for(var i =0;i++;i<=result.length){
+        sum+=result[i]
+    }
+    return sum
+}
+```
+6. 函数重载  js中没有重载 ts同名函数传入不同参数 执行结果
+```
+function css(config:any):any{
+
+}
+function css (config:any,value:any){
+    
+}
 ```
